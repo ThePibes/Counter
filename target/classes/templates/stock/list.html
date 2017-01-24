@@ -1,0 +1,60 @@
+<div idStock="page-wrapper" xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="listStock">
+    <div class="container-fluid" style="width:95%; margin:auto;">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Productos
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="icon-dashboard"></i>  <a href="#">Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <i class="icon-archive"></i> Productos
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <br/>
+                <input type="text" class="form-control" placeholder="Buscar" />
+            </div>
+            <div class="col-sm-1 pull-right">
+                <br/>
+                <a class="btn btn-default" th:href="@{'/stock/nuevo'}">Nuevo</a>
+                <br/>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(stock)}">
+            No hay datos GIIL!
+        </div>
+        <!-- /.row -->
+        <div th:if="${not #lists.isEmpty(stock)}">
+            <table class="table table-hover">
+                <thead>
+                <tr class="text-center">
+                    <th>Detalle</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${stock}">
+                    <td th:text="${c.detalle}">Pepsi</td>
+                    <td th:text="${'$ '+c.precio}">0.3</td>
+                    <td th:text="${c.cantidad}">2</td>
+                    <td><a th:href="@{'/stock/details'(idStock=${c.idStock})}" class="icon-search"></a></td>
+                    <td><a th:href="@{'/stock/edit'(idStock=${c.idStock})}" class="icon-edit"></a></td>
+                    <td><a th:href="@{'/stock/delete'(idStock=${c.idStock})}" class="icon-trash"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

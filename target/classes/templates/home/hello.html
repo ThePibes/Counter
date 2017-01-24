@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script  type="application/javascript"
+             src="webjars/jquery/3.1.1-1/jquery.js"></script>
+    <script  type="application/javascript"
+             src="webjars/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <!--SweetAlert-->
+    <link rel="stylesheet" type="text/css" href="webjars/sweetalert/1.0.0/sweetalert.css"/>
+    <script type="application/javascript"
+            src="webjars/sweetalert/1.0.0/sweetalert-dev.js"></script>
+</head>
+<body>
+<button idStock="prueba">apretame</button>
+<!--/*@thymesVar idStock="name" type="com.cosa.controller.helloController"*/-->
+<p th:class="bg-primary" th:text="'Hello, ' + ${name} + '!'" />
+<!--/*@thymesVar idStock="apellido" type="com.cosa.controller.helloController"*/-->
+<p th:class="bg-primary"  th:text="${apellido}"  />
+<!--/*@thymesVar idStock="edad" type="com.cosa.controller.helloController"*/-->
+<p th:class="bg-primary" th:text="${edad}"  />
+<script>
+    $("#prueba").on("click",function () {
+        console.log("anda");
+        swal("Good job!", "You clicked the button!", "success");
+    });
+
+</script>
+</body>
+</html>

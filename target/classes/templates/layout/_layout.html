@@ -1,0 +1,69 @@
+<!DOCTYPE html >
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="mainPage(page, fragment)">
+    <head >
+        <!--  App Description  -->
+        <title>Spring Boot</title>
+        <meta name="description" content=""/>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+        <!-- css -->
+        <link rel="stylesheet" type="text/css"
+              href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css"
+              href="/webjars/font-awesome/3.2.1/css/font-awesome.min.css"/>
+        <script  type="application/javascript"
+                 src="/webjars/jquery/3.1.1-1/jquery.js"></script>
+        <script  type="application/javascript"
+              src="/webjars/bootstrap/3.3.7/js/bootstrap.js"></script>
+        <!--SweetAlert-->
+        <link rel="stylesheet" type="text/css"
+              href="/webjars/sweetalert/1.0.0/sweetalert.css"/>
+        <script type="application/javascript"
+                src="webjars/sweetalert/1.0.0/sweetalert.min.js"></script>
+        <!--UtilsJS-->
+        <script type="application/javascript" th:href="@{/static/js/utils.js}"
+                href="../../static/js/utils.js"></script>
+
+
+
+
+        <link rel="stylesheet" type="text/css" href="/static/css/sb-admin.css" />
+
+
+    </head>
+    <body >
+        <div id="wrapper" >
+            <div th:replace="layout/header :: menu">
+                some prototyping markup over here 1...
+            </div>
+            <div th:include="${page} :: ${fragment}">
+                some prototyping markup over here 2...
+            </div>
+            <div th:include="layout/footer :: footer">
+                some prototyping markup over here 3...
+            </div>
+        </div>
+    </body>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            var type = [[${type}]];
+            if(type != null || type != '' )
+            {
+                var message = [[${message}]];
+                if(type == 'success')
+                {
+                    swal("Exito!", message, "success");
+                }
+                if(type == 'error')
+                {
+                    swal("Algo salio mal", message, "error");
+                }
+            }
+        })
+    </script>
+</html>
+
