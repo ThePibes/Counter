@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Transactional
 @Repository
-public class stockDAOImpl implements stockDAO{
+public class stockDAOImpl extends GenericDaoImpl<Stock, Integer> implements stockDAO{
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -26,20 +26,4 @@ public class stockDAOImpl implements stockDAO{
         return sessionFactory.getCurrentSession();
     }
 
-    @Override
-    public boolean saveStock(Stock stock){
-        try{
-            getSession().save(stock);
-            return true;
-        }catch (Exception e){
-            String msj = e.getMessage();
-            return false;
-        }
-    }
-
-    @Override
-    public List<Stock> findAllStock() {
-        Query query = getSession().createQuery("from Stock");
-        return query.list();
-    }
 }

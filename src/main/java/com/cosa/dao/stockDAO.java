@@ -7,7 +7,5 @@ import java.util.List;
 /**
  * Created by root on 21/01/17.
  */
-public interface stockDAO {
-    public boolean saveStock(Stock stock);
-    public List<Stock> findAllStock();
+public interface stockDAO extends GenericDao<Stock, Integer> {
 }
