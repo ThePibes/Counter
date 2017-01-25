@@ -25,7 +25,7 @@ public class stockController {
 
     @RequestMapping(value = "/stock", method= RequestMethod.GET)
     public String listProduct(Model model){
-        model.addAttribute("stock", stockService.findAllStock());
+        model.addAttribute("stock", stockService.listAll());
         return "layout/_layout :: mainPage(page='stock/list', fragment='listStock')";
     }
 
@@ -37,7 +37,7 @@ public class stockController {
         }else if(!resultado){
             utils.errorMessage("Fallo",new Exception(), model);
         }
-        model.addAttribute("stock", stockService.findAllStock());
+        model.addAttribute("stock", stockService.listAll());
         return "layout/_layout :: mainPage(page='stock/list', fragment='listStock')";
     }
 
@@ -48,9 +48,10 @@ public class stockController {
 
     @RequestMapping(value = "/stock", method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute Stock stockForm, RedirectAttributes ra){
-        if(stockService.save(stockForm)) {
+        try{
+            stockService.save(stockForm);
             ra.addFlashAttribute("resultado", true);
-        }else{
+        }catch (Exception e){
             ra.addFlashAttribute("resultado", false);
         }
         return "redirect:stockActualizado";

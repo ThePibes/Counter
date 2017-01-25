@@ -16,11 +16,9 @@ public class StockService {
     @Autowired
     private stockDAO stockdao;
 
-    public boolean save(Stock stock){
-        return stockdao.saveStock(stock);
+    public void save(Stock stock){
+        stockdao.add(stock);
     }
+    public List<Stock> listAll(){ return stockdao.getAll(); }
 
-    public List<Stock> findAllStock(){
-        return stockdao.findAllStock();
-    }
 }
