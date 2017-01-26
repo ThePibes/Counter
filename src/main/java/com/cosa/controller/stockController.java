@@ -33,7 +33,7 @@ public class stockController {
     public String listProductUpdate(Model model, @ModelAttribute(name = "resultado") boolean resultado ){
 
         if(Objects.nonNull(resultado) && resultado ){
-            utils.successMessage("Se guardo correctamente",model);
+            utils.successMessage("Acción correctamente",model);
         }else if(!resultado){
             utils.errorMessage("Fallo",new Exception(), model);
         }
@@ -55,6 +55,48 @@ public class stockController {
             ra.addFlashAttribute("resultado", false);
         }
         return "redirect:stockActualizado";
+    }
+    @RequestMapping(value = "/stock/details/{id}", method = RequestMethod.GET)
+    public String detailsProduct(@ModelAttribute Stock stockForm, @PathVariable("id") int id, Model model)
+    {
+        Stock stock = stockService.findById(id);
+        if(stock != null)
+        {
+            model.addAttribute("stock",stock);
+            return "layout/_layout :: mainPage(page='stock/details', fragment='detailsStock')";
+        }
+        //TODO: Aplicar mensaje de error por no encontrar el stock
+        return "redirect:../";
+    }
+    @RequestMapping(value = "/stock/edit/{id}", method = RequestMethod.GET)
+    public String editProduct(@ModelAttribute Stock stockForm, @PathVariable("id") int id, Model model)
+    {
+        Stock stock = stockService.findById(id);
+        if(stock != null)
+        {
+            model.addAttribute("stock",stock);
+            return "layout/_layout :: mainPage(page='stock/edit', fragment='editStock')";
+        }
+        //TODO: Aplicar mensaje de error por no encontrar el stock
+        return "redirect:../";
+    }
+    @RequestMapping(value = "/stock/edit", method = RequestMethod.POST)
+    public String updateProduct(@ModelAttribute Stock stockForm)
+    {
+        //TODO: Aplicar mensaje de error o success
+        stockService.update(stockForm);
+        return "redirect:../stock";
+
+    }
+    @RequestMapping(value = "/stock/delete/{id}", method = RequestMethod.GET)
+    public String deleteProduct(Model model, @ModelAttribute Stock stockForm, RedirectAttributes ra, @PathVariable("id") int id){
+        try{
+            stockService.remove(id);
+            ra.addFlashAttribute("resultado", true);
+        }catch (Exception e){
+            ra.addFlashAttribute("resultado", false);
+        }
+        return "redirect:../";
     }
 
 }
