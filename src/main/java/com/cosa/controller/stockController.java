@@ -1,14 +1,22 @@
 package com.cosa.controller;
 
+import com.cosa.pojo.Role;
 import com.cosa.pojo.Stock;
+import com.cosa.pojo.Usuario;
 import com.cosa.service.StockService;
 import com.cosa.Utils.UtilsMsj;
+import com.cosa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 /**
@@ -22,6 +30,20 @@ public class stockController {
 
     @Autowired
     private StockService stockService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+
+    @RequestMapping(value = "/", method= RequestMethod.GET)
+    public String index(Model model){
+        return "home/hello";
+//        Usuario usuario = new Usuario();
+//        usuario.setNombre("ale");
+//        usuario.setPassword("123");
+//        usuario.setRole(Role.ROLE_USER);
+//        usuarioService.saveUsuario(usuario);
+    }
 
     @RequestMapping(value = "/stock", method= RequestMethod.GET)
     public String listProduct(Model model){
@@ -99,4 +121,13 @@ public class stockController {
         return "redirect:../";
     }
 
+
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/stock";
+    }
 }
