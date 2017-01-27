@@ -39,9 +39,9 @@ public class stockController {
     public String index(Model model){
         return "home/hello";
 //        Usuario usuario = new Usuario();
-//        usuario.setNombre("ale");
+//       usuario.setNombre("kpocha");
 //        usuario.setPassword("123");
-//        usuario.setRole(Role.ROLE_USER);
+//       usuario.setRole(Role.ROLE_USER);
 //        usuarioService.saveUsuario(usuario);
     }
 
