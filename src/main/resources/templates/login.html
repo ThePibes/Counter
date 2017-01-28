@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
     <!-- css -->
+    <link rel="stylesheet" type="text/css" href="/static/css/sb-admin.css"/>
     <link rel="stylesheet" type="text/css"
           href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css"
@@ -23,10 +24,6 @@
           href="/webjars/sweetalert/1.0.0/sweetalert.css"/>
     <script type="application/javascript"
             src="webjars/sweetalert/1.0.0/sweetalert.min.js"></script>
-    <!--UtilsJS-->
-    <!--<script type="application/javascript" th:href="@{/static/js/utils.js}"
-            href="../../static/js/utils.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="/static/css/sb-admin.css"/>
 
 </head>
 <body>
@@ -38,18 +35,20 @@
                     <h3 class="panel-title">Iniciar Sesión</h3>
                 </div>
                 <div class="panel-body">
-                    <form th:action="@{/appLogin}" method="post">
-                        <div class="form-group has-error has-feedback">
-                            <input class="form-control" type="text" id="username" name="username" autofocus="autofocus"/>
+                    <form th:action="@{/login}" method="post">
+                        <label for="username">Username</label>:
+                        <!--/*@thymesVar id="loginError" type="com.cosa.controller.LoginController"*/-->
+                        <div th:class="${loginError} ? 'form-group has-feedback has-error' : 'form-group has-feedback' " >
+                            <input class="form-control" type="text" id="username" name="username" autofocus="autofocus" required="required"/>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" id="password" name="password"/> <br/>
-                        </div>
-                        <input class="btn btn-lg btn-primary btn-block" type="submit" id="entrar" value="Entrar"/>
-                        <!--<label for="username">Username</label>:
-                         <br/>
                         <label for="password">Password</label>:
-                        <input type="submit" value="Log in"/>-->
+                        <div class="form-group">
+                            <div th:class="${loginError} ? 'form-group has-feedback has-error' : 'form-group has-feedback' ">
+                                <input class="form-control" type="password" id="password" name="password" required="required"/>
+                            </div>
+                        </div>
+                        <p th:if="${loginError}" class="alert-danger bg-danger">Usuario y/o contraseña incorrecto</p>
+                        <input class="btn btn-lg btn-primary btn-block" type="submit" id="entrar" value="Entrar"/>
                     </form>
                 </div>
             </div>
@@ -57,4 +56,15 @@
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        var type = 'error';
+        var loginError = [[${loginError}]];
+
+        if (loginError) {
+            var message = "Verifique usuario y contraseña";
+            swal("Incorrecto", message, "error");
+        }
+    })
+</script>
 </html>

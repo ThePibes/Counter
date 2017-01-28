@@ -80,7 +80,7 @@ fabric.properties
 target/*
 
 ### Directorio .idea ###
-idea/*
+.idea/*
 
 # BlueJ files
 *.ctxt

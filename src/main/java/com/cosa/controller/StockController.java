@@ -23,7 +23,7 @@ import java.util.Objects;
  * Created by root on 18/01/17.
  */
 @Controller
-public class stockController {
+public class StockController {
 
     @Autowired
     public UtilsMsj utils;
@@ -38,11 +38,11 @@ public class stockController {
     @RequestMapping(value = "/", method= RequestMethod.GET)
     public String index(Model model){
         return "home/hello";
-//        Usuario usuario = new Usuario();
-//       usuario.setNombre("kpocha");
-//        usuario.setPassword("123");
-//       usuario.setRole(Role.ROLE_USER);
-//        usuarioService.saveUsuario(usuario);
+      //  Usuario usuario = new Usuario();
+      //usuario.setNombre("kpocha");
+        //usuario.setPassword("123");
+       //usuario.setRole(Role.ROLE_USER);
+        //usuarioService.saveUsuario(usuario);
     }
 
     @RequestMapping(value = "/stock", method= RequestMethod.GET)

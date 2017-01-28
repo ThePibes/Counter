@@ -13,6 +13,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String indexForm(Model model) {
+        model.addAttribute("loginError", false);
         return "login";
     }
 //    @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -20,11 +21,11 @@ public class LoginController {
 //        return "/";
 //    }
 //
-//    @RequestMapping("/login-error.html")
-//    public String loginError(Model model) {
-//        model.addAttribute("loginError", true);
-//        return "login.html";
-//    }
+    @RequestMapping("/login/error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login";
+    }
 
 
 }
