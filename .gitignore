@@ -76,6 +76,12 @@ fabric.properties
 ### Java ###
 *.class
 
+### Directorio Target ###
+target/*
+
+### Directorio .idea ###
+.idea/*
+
 # BlueJ files
 *.ctxt
 

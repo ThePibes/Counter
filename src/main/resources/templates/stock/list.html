@@ -48,9 +48,9 @@
                     <td th:text="${c.detalle}">Pepsi</td>
                     <td th:text="${'$ '+c.precio}">0.3</td>
                     <td th:text="${c.cantidad}">2</td>
-                    <td><a th:href="@{'/stock/details'(idStock=${c.idStock})}" class="icon-search"></a></td>
-                    <td><a th:href="@{'/stock/edit'(idStock=${c.idStock})}" class="icon-edit"></a></td>
-                    <td><a th:href="@{'/stock/delete'(idStock=${c.idStock})}" class="icon-trash"></a></td>
+                    <td><a th:href="@{'/stock/details/{id}'(id=${c.idStock})}" class="icon-search"></a></td>
+                    <td><a th:href="@{'/stock/edit/{id}'(id=${c.idStock})}" class="icon-edit"></a></td>
+                    <td><a th:href="@{'/stock/delete/{id}'(id=${c.idStock})}" class="icon-trash swal-delete"></a></td>
                 </tr>
                 </tbody>
             </table>

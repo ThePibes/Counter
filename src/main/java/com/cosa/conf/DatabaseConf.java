@@ -5,12 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 /**
- * Created by root on 22/01/17.
+ * @author Alessandro
  */
 @Configuration
 @EnableTransactionManagement
@@ -35,9 +37,9 @@ public class DatabaseConf {
         @Value("${hibernate.show_sql}")
         private String HIBERNATE_SHOW_SQL;
 
-        //No Borrar
-      /*@Value("${hibernate.hbm2ddl.auto}")
-        private String HIBERNATE_HBM2DDL_AUTO;*/
+        //Descomentar para realizar migraciones -- No Borrar
+        //@Value("${hibernate.hbm2ddl.auto}")
+        //private String HIBERNATE_HBM2DDL_AUTO;
 
         @Value("${entitymanager.packagesToScan}")
         private String ENTITYMANAGER_PACKAGES_TO_SCAN;
@@ -74,4 +76,9 @@ public class DatabaseConf {
             transactionManager.setSessionFactory(sessionFactory().getObject());
             return transactionManager;
         }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

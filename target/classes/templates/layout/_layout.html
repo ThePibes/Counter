@@ -25,18 +25,17 @@
         <script type="application/javascript"
                 src="webjars/sweetalert/1.0.0/sweetalert.min.js"></script>
         <!--UtilsJS-->
-        <script type="application/javascript" th:href="@{/static/js/utils.js}"
-                href="../../static/js/utils.js"></script>
+        <!--<script type="application/javascript" th:href="@{/static/js/utils.js}"
+                href="../../static/js/utils.js"></script>-->
 
 
 
 
         <link rel="stylesheet" type="text/css" href="/static/css/sb-admin.css" />
 
-
     </head>
     <body >
-        <div id="wrapper" >
+        <div id="wrapper">
             <div th:replace="layout/header :: menu">
                 some prototyping markup over here 1...
             </div>
@@ -63,7 +62,29 @@
                     swal("Algo salio mal", message, "error");
                 }
             }
+            $('.swal-delete').bind('click', function (e) {
+                var href = $(this).attr('href');
+                e.preventDefault();
+                swal({
+                    title: "¿Está Seguro?",
+                    text: "",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Si",
+                    cancelButtonText: "No",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        window.location = href;
+                    } else {
+                        swal("Cancelado", "Su registro no fue eliminado", "error");
+                    }
+                });
+            })
         })
+
     </script>
 </html>
 
