@@ -40,12 +40,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 System.out.println("login correcto");
                 return new UsernamePasswordAuthenticationToken(principal, credentials, user.getAuthorities());
             } else {
-                System.out.println("eror de login : " + principal);
+                System.out.println("error de login : " + principal);
                 throw new BadCredentialsException("error de login");
             }
 
         } else {
-            System.out.println("eror de login : " + principal);
+            System.out.println("error de login : " + principal);
             throw new BadCredentialsException("error de login");
         }
 

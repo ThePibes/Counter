@@ -18,15 +18,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/stock/**").access("hasRole('ROLE_USER')")
-                .and()
+        http
                 .formLogin()
                     .loginPage("/login")
-                    .loginProcessingUrl("/appLogin")
+                    //.successForwardUrl("/stock")
+                    .failureForwardUrl("/login/error")
+                    .failureUrl("/login/error")
                 .and()
-                .logout();
+                .authorizeRequests()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/stock/**").access("hasRole('ROLE_USER')")
+                    //.failureForwardUrl("/login")
+                    //.loginProcessingUrl("/login");
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login");
+
                    // .defaultSuccessUrl("/stock.html");
     }
 }

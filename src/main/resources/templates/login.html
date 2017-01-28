@@ -1,16 +1,70 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html >
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login page</title>
+    <!--  App Description  -->
+    <title>Spring Boot</title>
+    <meta name="description" content=""/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="/static/css/sb-admin.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/font-awesome/3.2.1/css/font-awesome.min.css"/>
+    <script type="application/javascript"
+            src="/webjars/jquery/3.1.1-1/jquery.js"></script>
+    <script type="application/javascript"
+            src="/webjars/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <!--SweetAlert-->
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/sweetalert/1.0.0/sweetalert.css"/>
+    <script type="application/javascript"
+            src="webjars/sweetalert/1.0.0/sweetalert.min.js"></script>
+
 </head>
 <body>
-<h1>Login page prueba</h1>
-<form th:action="@{/appLogin}" method="post">
-    <label for="username">Username</label>:
-    <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
-    <label for="password">Password</label>:
-    <input type="password" id="password" name="password" /> <br />
-    <input type="submit" value="Log in" />
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Iniciar Sesión</h3>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/login}" method="post">
+                        <label for="username">Username</label>:
+                        <!--/*@thymesVar id="loginError" type="com.cosa.controller.LoginController"*/-->
+                        <div th:class="${loginError} ? 'form-group has-feedback has-error' : 'form-group has-feedback' " >
+                            <input class="form-control" type="text" id="username" name="username" autofocus="autofocus" required="required"/>
+                        </div>
+                        <label for="password">Password</label>:
+                        <div class="form-group">
+                            <div th:class="${loginError} ? 'form-group has-feedback has-error' : 'form-group has-feedback' ">
+                                <input class="form-control" type="password" id="password" name="password" required="required"/>
+                            </div>
+                        </div>
+                        <p th:if="${loginError}" class="alert-danger bg-danger">Usuario y/o contraseña incorrecto</p>
+                        <input class="btn btn-lg btn-primary btn-block" type="submit" id="entrar" value="Entrar"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script>
+    $(document).ready(function () {
+        var type = 'error';
+        var loginError = [[${loginError}]];
+
+        if (loginError) {
+            var message = "Verifique usuario y contraseña";
+            swal("Incorrecto", message, "error");
+        }
+    })
+</script>
 </html>
