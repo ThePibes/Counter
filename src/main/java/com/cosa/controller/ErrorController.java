@@ -1,4 +1,5 @@
-/*
+package com.cosa.controller;/*
+
 package com.cosa.controller;
 
 import org.slf4j.Logger;
@@ -8,9 +9,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 */
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by kp0cH4 on 27/01/17.
  *//*
+
 
 @ControllerAdvice
 public class ErrorController {
@@ -26,8 +38,8 @@ public class ErrorController {
         model.addAttribute("errorMessage", errorMessage);
         return "error";
     }
-    */
-/*@ExceptionHandler(Throwable.class)
+
+@ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @RequestMapping(value = "/error")
     public String exception2(final Throwable throwable, final Model model) {
@@ -35,8 +47,10 @@ public class ErrorController {
         String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");
         model.addAttribute("errorMessage", errorMessage);
         return "error";
-    }*//*
+    }
 
 
 }
+
 */
+
